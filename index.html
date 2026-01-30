@@ -1,67 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta property="og:title" content="Click me to get new surprises 💝💖">
-<meta property="og:description" content="A little birthday magic made just for you 🤍">
-<meta property="og:image" content="https://yourusername.github.io/birthday-surprise/images/preview.jpg">
+<meta charset="UTF-8">
+<title>Click me to get new surprises 💝</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ffd1dc, #fff5f8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
+<!-- WhatsApp Preview -->
+<meta property="og:title" content="Click me to get new surprises 💝">
+<meta property="og:description" content="A little birthday magic made just for you 🤍">
+<meta property="og:image" content="images/preview.jpg">
 
-    .box {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-      max-width: 420px;
-    }
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins&display=swap" rel="stylesheet">
 
-    h1 {
-      color: #e91e63;
-      margin-bottom: 15px;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #fbf7e8;
+    overflow-x: hidden;
+}
 
-    p {
-      color: #555;
-    }
+/* Floating hearts */
+.heart {
+    position: fixed;
+    font-size: 16px;
+    animation: float 8s linear infinite;
+    opacity: 0.6;
+}
 
-    button {
-      margin-top: 25px;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 30px;
-      background: #e91e63;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+@keyframes float {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+}
 
-    button:hover {
-      transform: scale(1.08);
-      background: #d81b60;
-    }
-  </style>
+/* Sections */
+section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Intro */
+.intro {
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.intro p {
+    font-size: 1.1rem;
+    color: #7a4a4a;
+    max-width: 600px;
+}
+
+/* Title */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #8b3a3a;
+}
+
+/* Button */
+.btn {
+    margin-top: 25px;
+    padding: 14px 32px;
+    border-radius: 25px;
+    border: none;
+    background: #f5a3b7;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+    background: #ec7a96;
+}
+
+/* Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+}
+
+.photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s;
+}
+
+.photo:hover img {
+    transform: scale(1.15);
+}
+
+.caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(122, 74, 74, 0.75);
+    color: #fff;
+    padding: 10px;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.photo:hover .caption {
+    opacity: 1;
+}
+
+/* Message card */
+.card {
+    background: #e7dcf6;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 650px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+    font-family: 'Playfair Display', serif;
+    color: #5a3a8b;
+}
+
+.card p {
+    color: #3f2c5f;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+</style>
 </head>
 
 <body>
-  <div class="box">
-    <h1>🎁 Click Me</h1>
-    <p>I made something special just for you 💕</p>
-    <button onclick="alert('Surprise page coming next 🎉')">
-      Open Surprise
-    </button>
-  </div>
+
+<!-- Floating hearts -->
+<script>
+for(let i=0;i<30;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML=Math.random()>0.5?"💗":"✨";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=5+Math.random()*5+"s";
+    document.body.appendChild(h);
+}
+</script>
+
+<!-- Section 1: Intro -->
+<section class="intro">
+    <div>
+        <p>Today is all about celebrating you and the joy you bring to my life</p>
+        <h1>Happy Birthday, My Love 💕</h1>
+        <button class="btn" onclick="scrollToGallery()">Click for a Surprise 💝</button>
+    </div>
+</section>
+
+<!-- Section 2: Gallery -->
+<section id="gallery">
+    <div class="gallery">
+        <div class="photo">
+            <img src="images/photo1.jpg">
+            <div class="caption">You're my favorite place 💖</div>
+        </div>
+        <div class="photo">
+            <img src="images/photo2.jpg">
+            <div class="caption">With you, everything feels right ✨</div>
+        </div>
+        <div class="photo">
+            <img src="images/photo3.jpg">
+            <div class="caption">I fell for you right here 🥰</div>
+        </div>
+        <div class="photo">
+            <img src="images/photo4.jpg">
+            <div class="caption">My happiest memories 💞</div>
+        </div>
+        <div class="photo">
+            <img src="images/photo5.jpg">
+            <div class="caption">You are my calm 🤍</div>
+        </div>
+        <div class="photo">
+            <img src="images/photo6.jpg">
+            <div class="caption">Always us ❤️</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Message -->
+<section>
+    <div class="card">
+        <h2>A Special Message for You 💌</h2>
+        <p>
+            Happy birthday to the most beautiful soul in my life.  
+            You make my world brighter just by being in it.
+            <br><br>
+            With you, even the simplest moments feel magical.
+            I am so grateful for your love, your laughter,
+            and every memory we share.
+        </p>
+        <p><strong>Happy Birthday, my forever 💖</strong></p>
+    </div>
+</section>
+
+<!-- Section 4: Ending -->
+<section>
+    <div class="card">
+        <h2>Forever Starts Here 💕</h2>
+        <p>
+            This page is just a small reflection  
+            of how deeply you are loved.
+            <br><br>
+            No matter where life takes us,  
+            my heart will always choose you.
+        </p>
+        <p><strong>I love you — always 🤍</strong></p>
+    </div>
+</section>
+
+<script>
+function scrollToGallery(){
+    document.getElementById("gallery").scrollIntoView({behavior:'smooth'});
+}
+</script>
+
 </body>
 </html>
