@@ -5,11 +5,6 @@
 <title>Click me to get new surprises 💝</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- WhatsApp Preview -->
-<meta property="og:title" content="Click me to get new surprises 💝">
-<meta property="og:description" content="A little birthday magic made just for you 🤍">
-<meta property="og:image" content="images/preview.jpg">
-
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins&display=swap" rel="stylesheet">
 
@@ -44,32 +39,44 @@ section {
     padding: 40px;
 }
 
-/* Intro */
-.intro {
-    animation: fadeIn 2s ease;
+/* Hidden sections */
+.hidden {
+    display: none;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.intro p {
-    font-size: 1.1rem;
+/* Typing effect */
+.typing {
+    font-size: 1.15rem;
     color: #7a4a4a;
     max-width: 600px;
+    white-space: pre-line;
 }
 
-/* Title */
-h1 {
+.cursor {
+    display: inline-block;
+    width: 2px;
+    background: #7a4a4a;
+    animation: blink 1s infinite;
+    margin-left: 3px;
+}
+
+@keyframes blink {
+    0%,50%,100% { opacity: 1; }
+    25%,75% { opacity: 0; }
+}
+
+/* Title formatting for final line */
+#finalTitle {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     color: #8b3a3a;
+    margin-top: 20px;
+    display: none;
 }
 
-/* Button */
+/* Buttons */
 .btn {
-    margin-top: 25px;
+    margin-top: 30px;
     padding: 14px 32px;
     border-radius: 25px;
     border: none;
@@ -126,7 +133,7 @@ h1 {
     opacity: 1;
 }
 
-/* Message card */
+/* Cards */
 .card {
     background: #e7dcf6;
     padding: 40px;
@@ -145,6 +152,24 @@ h1 {
     line-height: 1.7;
     font-size: 0.95rem;
 }
+
+/* Heart burst */
+.burst-heart {
+    position: fixed;
+    font-size: 20px;
+    animation: burst 1.2s ease forwards;
+}
+
+@keyframes burst {
+    from { transform: translate(0,0) scale(1); opacity: 1; }
+    to {
+        transform: translate(
+            calc(-100px + 200px * var(--x)),
+            calc(-200px * var(--y))
+        ) scale(0.3);
+        opacity: 0;
+    }
+}
 </style>
 </head>
 
@@ -162,81 +187,130 @@ for(let i=0;i<30;i++){
 }
 </script>
 
-<!-- Section 1: Intro -->
+<!-- SECTION 1: TYPING INTRO -->
 <section class="intro">
     <div>
-        <p>Today is all about celebrating you and the joy you bring to my life</p>
-        <h1>Happy Birthday, My Love 💕</h1>
-        <button class="btn" onclick="scrollToGallery()">Click for a Surprise 💝</button>
+        <div id="typingText" class="typing"></div><span class="cursor"></span>
+        <h1 id="finalTitle"></h1>
+        <button id="startBtn" class="btn hidden" onclick="unlockGallery()">
+            Click for your first surprise 💝
+        </button>
     </div>
 </section>
 
-<!-- Section 2: Gallery -->
-<section id="gallery">
-    <div class="gallery">
-        <div class="photo">
-            <img src="images/photo1.jpg">
-            <div class="caption">You're my favorite place 💖</div>
+<!-- SECTION 2: GALLERY -->
+<section id="gallery" class="hidden">
+    <div>
+        <div class="gallery">
+            <div class="photo"><img src="images/Photo1.jpg"><div class="caption">You're my favorite place 💖</div></div>
+            <div class="photo"><img src="images/photo2.jpg"><div class="caption">With you, everything feels right. Asehi hamesha Sath Rehna ✨</div></div>
+            <div class="photo"><img src="images/photo3.jpg"><div class="caption">I fell for you right here 🥰</div></div>
+            <div class="photo"><img src="images/photo4.jpg"><div class="caption">My happiest memories 💞</div></div>
+            <div class="photo"><img src="images/photo5.jpg"><div class="caption">You are my calm 🤍</div></div>
+            <div class="photo"><img src="images/photo6.jpg"><div class="caption">Always us ❤️</div></div>
         </div>
-        <div class="photo">
-            <img src="images/photo2.jpg">
-            <div class="caption">With you, everything feels right ✨</div>
-        </div>
-        <div class="photo">
-            <img src="images/photo3.jpg">
-            <div class="caption">I fell for you right here 🥰</div>
-        </div>
-        <div class="photo">
-            <img src="images/photo4.jpg">
-            <div class="caption">My happiest memories 💞</div>
-        </div>
-        <div class="photo">
-            <img src="images/photo5.jpg">
-            <div class="caption">You are my calm 🤍</div>
-        </div>
-        <div class="photo">
-            <img src="images/photo6.jpg">
-            <div class="caption">Always us ❤️</div>
-        </div>
+        <button class="btn" onclick="unlockSecret()">One more memory ✨</button>
     </div>
 </section>
 
-<!-- Section 3: Message -->
-<section>
+<!-- SECTION 3: SECRET -->
+<section id="secret" class="hidden">
     <div class="card">
-        <h2>A Special Message for You 💌</h2>
+        <h2>Just Between Us 🤍</h2>
         <p>
-            Happy birthday to the most beautiful soul in my life.  
-            You make my world brighter just by being in it.
+            If I could pause time,  
+            I’d stay right here with you.
             <br><br>
-            With you, even the simplest moments feel magical.
-            I am so grateful for your love, your laughter,
-            and every memory we share.
+            Loving you feels easy, warm, and safe.
         </p>
-        <p><strong>Happy Birthday, my forever 💖</strong></p>
+        <button class="btn" onclick="unlockFinal()">One last thing 🎁</button>
     </div>
 </section>
 
-<!-- Section 4: Ending -->
-<section>
+<!-- SECTION 4: FINAL -->
+<section id="final" class="hidden">
     <div class="card">
         <h2>Forever Starts Here 💕</h2>
         <p>
-            This page is just a small reflection  
-            of how deeply you are loved.
-            <br><br>
             No matter where life takes us,  
             my heart will always choose you.
         </p>
-        <p><strong>I love you — always 🤍</strong></p>
+        <p id="finalLine" class="hidden"><strong>Happy Birthday, my forever 🤍</strong></p>
     </div>
 </section>
 
 <script>
-function scrollToGallery(){
-    document.getElementById("gallery").scrollIntoView({behavior:'smooth'});
+const firstPart = 
+`Today is all about celebrating you
+and the joy you bring to my life
+`;
+
+const lastLine = `Happy Birthday, My Love 💕`;
+
+let i = 0;
+let j = 0;
+
+function typeFirstPart() {
+    if (i < firstPart.length) {
+        document.getElementById("typingText").innerHTML += firstPart.charAt(i);
+        i++;
+        setTimeout(typeFirstPart, 50);
+    } else {
+        typeLastLine();
+    }
+}
+
+function typeLastLine() {
+    if(j < lastLine.length){
+        document.getElementById("finalTitle").style.display="inline-block";
+        document.getElementById("finalTitle").innerHTML += lastLine.charAt(j);
+        j++;
+        setTimeout(typeLastLine, 80); // slightly slower for effect
+    } else {
+        document.getElementById("startBtn").classList.remove("hidden");
+    }
+}
+
+typeFirstPart();
+
+// Heart bursts
+function heartBurst(){
+    for(let i=0;i<12;i++){
+        let heart=document.createElement("div");
+        heart.className="burst-heart";
+        heart.innerHTML="💖";
+        heart.style.left="50%";
+        heart.style.top="60%";
+        heart.style.setProperty("--x", Math.random());
+        heart.style.setProperty("--y", Math.random());
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),1200);
+    }
+}
+
+function unlockGallery(){
+    heartBurst();
+    document.getElementById("gallery").classList.remove("hidden");
+    document.getElementById("gallery").scrollIntoView({behavior:"smooth"});
+}
+
+function unlockSecret(){
+    heartBurst();
+    document.getElementById("secret").classList.remove("hidden");
+    document.getElementById("secret").scrollIntoView({behavior:"smooth"});
+}
+
+function unlockFinal(){
+    heartBurst();
+    document.getElementById("final").classList.remove("hidden");
+    document.getElementById("final").scrollIntoView({behavior:"smooth"});
+    setTimeout(()=>{
+        document.getElementById("finalLine").classList.remove("hidden");
+    },2000);
 }
 </script>
 
 </body>
 </html>
+
+
